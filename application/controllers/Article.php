@@ -11,9 +11,9 @@ class Article extends CI_Controller
     }
 
     //affiche les articles
-    public function index()
+    public function view_article()
     {
-        $data['produit'] = $this->article_model->get();
+        $data['produit'] = $this->article_model->get_article();
 
 
         $this->load->view('templates/header');
