@@ -13,14 +13,14 @@ class Article_model extends CI_Model
 
 
     //recupere la totalité des articles
-    public function get_article($slug = FALSE)
+    public function get_article($id = 0)
     {
-        if($slug === FALSE)
+        if($id == 0)
         {
             $query = $this->db->get('produit');
             return $query->result_array();
         } else {
-            $query = $this->db->get_were('produit', array('slug' => $slug));
+            $query = $this->db->get_where('produit', array('produitId' => $id));
             return $query->row_array();
         }
     }

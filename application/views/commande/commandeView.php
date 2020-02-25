@@ -7,7 +7,7 @@
         <h5 class="card-header"><?php echo $commande['nomCommande'] ?></h5>
         <article class="card-body">
             <p class="card-text"><?php echo $commande['dateCommande'] ?></p>
-            <a href="#" class="btn btn-primary">Detail article</a>
+            <a href="#" class="btn btn-primary">Detail commande</a>
         </article>
     </section><br>
 

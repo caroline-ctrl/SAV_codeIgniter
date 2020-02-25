@@ -20,4 +20,19 @@ class Article extends CI_Controller
         $this->load->view('articles/articleView', $data);
         $this->load->view('templates/footer');
     }
+
+
+
+
+    //afficher un article en fonction de l'id
+    public function view_article_id($id)
+    {
+        $data['single_produit'] = $this->article_model->get_article($id);
+        $data['title'] = $data['single_produit']['nomProduit'];
+
+        $this->load->view('templates/header');
+        $this->load->view('articles/articleViewId', $data);
+        $this->load->view('templates/footer');
+
+    }
 }
