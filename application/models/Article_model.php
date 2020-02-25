@@ -12,8 +12,6 @@ class Article_model extends CI_Model
 
 
 
-
-
     //recupere la totalité des articles
     public function get($slug = FALSE)
     {
