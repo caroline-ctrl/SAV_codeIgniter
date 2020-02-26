@@ -8,13 +8,18 @@ class Commande_model extends CI_Model
     }
 
 
-    public function get_commande($slug = FALSE)
+
+
+
+    
+
+    public function get_commande($id = 0)
     {
-        if ($slug === FALSE){
+        if ($id == 0){
             $query = $this->db->get('commande');
             return $query->result_array();
         } else {
-            $query = $this->db->get_where('commande', array('slug' => $slug));
+            $query = $this->db->get_where('commande', array('commandeId' => $id));
             return $query->row_array();
         }
     }

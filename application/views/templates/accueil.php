@@ -1,4 +1,4 @@
-<h1>ESPACE ADMINISTRATION</h1>
+<h1><U>ESPACE ADMINISTRATION</U></h1>
 
 <ul>
     <li><a href="<?php echo site_url('article') ?>">Tous les articles</a></li>

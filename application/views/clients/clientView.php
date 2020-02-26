@@ -1,4 +1,4 @@
-<h1>Les clients</h1>
+<h1><U>Les clients</U></h1>
 
 <h5><a href="<?php echo site_url('page/view') ?>">Retour a la page d'accueil</a></h5><br>
 
