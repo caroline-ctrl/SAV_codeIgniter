@@ -9,6 +9,6 @@
     <article class="card-body">
         <p class="card-text"><?php echo $single_commande['dateCommande'] ?></p>
         <p class="card-text">Commande livrée <?php echo $single_commande['isDelivred'] ?>  (1 = oui, 0 = non)</p>
-        <p class="card-text">Detail produit : <?php echo $single_commande['fk_clientId'] ?></p>
+        <p class="card-text">Detail client : <?php echo $single_commande['nomClient'] ?></p>
     </article>
 </section><br>
