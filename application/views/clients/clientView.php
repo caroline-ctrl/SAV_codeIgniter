@@ -1,6 +1,7 @@
-<h1><U>Les clients</U></h1>
+<h1><U>LES CLIENTS</U></h1>
 
-<h5><a href="<?php echo site_url('page/view') ?>">Retour a la page d'accueil</a></h5><br>
+<h5><a href="<?php echo site_url('page/view') ?>">Retour a la page d'accueil</a></h5>
+<h5><a href="<?php echo site_url('client/create') ?>">Créer un nouveau client</a></h5><br>
 
 <?php foreach ($clients as $client) : ?>
     <section class="card">
@@ -11,7 +12,6 @@
             <p class="card-text"><?php echo $client['adresse'] ?></p>
             <p class="card-text"><?php echo $client['numTel'] ?></p>
             <p class="card-text"><?php echo $client['mail'] ?></p>
-            <!-- <a href="#" class="btn btn-primary">Detail article</a> -->
         </article>
     </section><br>
 

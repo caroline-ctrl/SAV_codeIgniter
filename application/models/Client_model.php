@@ -8,14 +8,29 @@ class Client_model extends CI_Model
     }
 
 
-    public function get_client($slug = FALSE)
+    // affiche les clients
+    public function get_client()
     {
-        if ($slug === FALSE){
             $query = $this->db->get('client');
             return $query->result_array();
-        }else {
-            $query = $this->db->get_where('client', array('slug' => $slug));
-            return $query->row_array();
+    }
+
+
+    // create, update
+    public function set_client(int $id = 0)
+    {
+        $data = array(
+            'nomClient' => $this->input->post('nomClient'),
+            'numClient' => $this->input->post('numClient'),
+            'adresse' => $this->input->post('adresse'),
+            'numTel' => $this->input->post('numTel'),
+            'mail' => $this->input->post('mail')
+        );
+
+        if ($id <= 0){
+            return $this->db->insert('client', $data);
         }
+        $this->db->where('clientId', $id);
+        return $this->db->update('client', $data);
     }
 }

@@ -17,7 +17,7 @@ class Commande_model extends CI_Model
             $query = $this->db->get('commande');
             return $query->result_array();
         } else {
-            $this->db->select('commande.*, client.nomClient');
+            $this->db->select('commande.*, client.nomClient, client.numClient');
             $this->db->from('commande');
             $this->db->join('client', 'client.clientId = commande.commandeId', 'left');
             $query = $this->db->get();
