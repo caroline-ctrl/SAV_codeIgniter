@@ -1,23 +1,35 @@
 <?php
-
 class Client_model extends CI_Model
 {
+    private $clientId;
+    private $nomClient;
+    private $numClient;
+    private $adresse;
+    private $numTel;
+    private $mail;
+
+
+    //CONSTRUCT
     public function __construct()
     {
         $this->load->database();
     }
 
 
+
+
+
     // affiche les clients ou un client
     public function get_client(int $id = 0)
     {
-        if ($id <= 0){
+        if ($id <= 0) {
             $query = $this->db->get('client');
             return $query->result_array();
         }
         $query = $this->db->get_where('client', array('clientId' => $id));
         return $query->row_array();
     }
+
 
 
     // create, update
@@ -31,7 +43,7 @@ class Client_model extends CI_Model
             'mail' => $this->input->post('mail')
         );
 
-        if ($id <= 0){
+        if ($id <= 0) {
             return $this->db->insert('client', $data);
         }
         $this->db->where('clientId', $id);
@@ -42,7 +54,7 @@ class Client_model extends CI_Model
 
 
     //supprimer un client
-    public function delete ($id)
+    public function delete($id)
     {
         return $this->db->delete('client', array('clientId' => $id));
     }

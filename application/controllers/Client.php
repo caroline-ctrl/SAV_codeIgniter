@@ -25,6 +25,8 @@ class Client extends CI_Controller
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
+        $this->client_objet->instanceTest();
+
         $data['title'] = 'Formulaire';
 
 
@@ -48,17 +50,13 @@ class Client extends CI_Controller
     //modifier un client
     public function edit ($id)
     {
-        $id = $this->uri->segment(3);
-        if (empty($id)){
-            show_404();
-        }
 
         $this->load->helper('form');
         $this->load->library('form_validation');
 
+        $data['title'] = 'Modification d\'un client';
         //afin de pouvoir récuperer l'id on fait appel a la methode get_client dans le model
         $data['single_client'] = $this->client_model->get_client($id);
-        $data['title'] = 'Modification d\'un client';
 
         $this->form_validation->set_rules('nomClient', 'NomClient', 'required');
         $this->form_validation->set_rules('numClient', 'NumClient', 'required');
@@ -67,15 +65,12 @@ class Client extends CI_Controller
         $this->form_validation->set_rules('mail', 'Mail', 'required');
 
         
-        
+        // vérifie les regles
         if ($this->form_validation->run() === FALSE){
             $this->load->view('templates/header', $data);
-            $this->load->view('clients/view', $data);
+            $this->load->view('clients/edit', $data);
             $this->load->view('templates/footer');
         } else {
-            // $this->load->view('templates/header');
-            // $this->load->view('clients/edit', $data);
-            // $this->load->view('templates/footer');
             $this->client_model->set_client($id);
             redirect(base_url('index.php/client/view_client'));
         }
