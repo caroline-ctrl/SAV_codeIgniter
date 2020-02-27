@@ -26,4 +26,32 @@ class Commande_model extends CI_Model
             // return $queryCommande->row_array();
         }
     }
+
+
+
+    //créer ou modifier une commande
+    public function set_commande(int $id = 0)
+    {
+        $data = array(
+            'nomCommande' => $this->input->post('nomCommande'),
+            'dateCommande' => $this->input->post('dateCommande'),
+            'isDelivred' => $this->input->post('isDelivred')
+        );
+
+        if ($id = 0){
+            return $this->db->insert('commande');
+        } else {
+            $this->db->where('commande', $id);
+            return $this->db->update('commande', $data);
+        }
+    }
+
+
+
+    // supprimer une commande
+    public function delete($id)
+    {
+        return $this->db->delete('commande', array('commandeId' => $id));
+    }
+
 }

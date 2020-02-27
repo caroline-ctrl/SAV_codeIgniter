@@ -11,5 +11,6 @@
         <p class="card-text">Quantité restante : <?php echo $single_produit['qttProduit'] ?></p>
         <p class="card-text">Disponible <?php echo $single_produit['isAvailable'] ?> (1 = oui, 0 = non)</p>
         <p class="card-text">Prix : <?php echo $single_produit['prixProduit'] ?> €</p>
+        
     </article>
 </section><br>

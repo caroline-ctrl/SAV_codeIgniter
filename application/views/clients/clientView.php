@@ -12,6 +12,9 @@
             <p class="card-text"><?php echo $client['adresse'] ?></p>
             <p class="card-text"><?php echo $client['numTel'] ?></p>
             <p class="card-text"><?php echo $client['mail'] ?></p>
+            <a href="<?php echo site_url('client/edit/' . $client['clientId']) ?>" class="btn btn-primary">Modifier</a>
+            <a href="<?php echo site_url('client/delete/' . $client['clientId']) ?>" class="btn btn-danger">Supprimer</a>
+
         </article>
     </section><br>
 

@@ -27,7 +27,3 @@
   
   <button type="submit" class="btn btn-primary" name="submit">Valider</button>
 </form>
-
-
-
-</form>

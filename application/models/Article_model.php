@@ -24,4 +24,35 @@ class Article_model extends CI_Model
             return $query->row_array();
         }
     }
+
+
+
+
+    // créer ou modifier un nouvel article
+    public function set_article(int $id = 0)
+    {
+
+        $data = array(
+            'nomProduit' => $this->input->post('nomProduit'),
+            'descriptProduit' => $this->input->post('descriptProduit'),
+            'qttProduit' => $this->input->post('qttProduit'),
+            'isAvailable' => $this->input->post('isAvailable'),
+            'prixProduit' => $this->input->post('prixProduit')
+        );
+
+        if ($id <= 0){
+            return $this->db->insert('produit', $data);
+        } else {
+            $this->db->where('produitId', $id);
+            return $this->db->update('produit', $data);
+        }
+    }
+
+
+
+    //supprimer
+    public function delete ($id)
+    {
+        return $this->db->delete('produit', array('produitId' => $id));
+    }
 }
