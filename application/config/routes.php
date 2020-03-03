@@ -52,13 +52,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['commande/(:any)'] = 'commande/view_commande_id/$1';
 $route['commande'] = 'commande/view_commande';
 
-$route['clients/view'] = 'client/view_client';
+$route['clients/produitClient/(:any)'] = 'client/get_product_client/$1';
+$route['clients/commandesClient/(:any)'] = 'client/get_commande_client/$1';
+$route['clients/viewInactif'] = 'client/view_client_inactif';
+$route['clients/viewActif'] = 'client/view_client_actif';
 $route['clients/create'] = 'client/create';
 $route['clients/edit/(:any)'] = 'client/edit/$1';
 $route['clients/delete/(:any)'] = 'client/delete/$1';
 
 $route['article'] = 'article/view_article';
 $route['articles/(:any)'] = 'article/view_article/$1';
+$route['article/edit/(:any)'] = 'article/edit/$1';
 $route['article/create'] = 'article/create';
 
 $route['default_controller'] = 'page/view';

@@ -9,23 +9,34 @@ class Client extends CI_Controller
         $this->load->model('client_model');
     }
 
-
-    public function view_client()
+    //affiche un client actif
+    public function view_client_actif()
     {
-        $data['clients'] = $this->client_model->get_client();
+        $data['clients'] = $this->client_model->get_client_actif();
 
         $this->load->view('templates/header');
-        $this->load->view('clients/clientView', $data);
+        $this->load->view('clients/clientViewActif', $data);
         $this->load->view('templates/footer');
     }
 
 
+        //affiche un client actif
+        public function view_client_inactif()
+        {
+            $data['clients'] = $this->client_model->get_client_inactif();
+    
+            $this->load->view('templates/header');
+            $this->load->view('clients/clientViewInactif', $data);
+            $this->load->view('templates/footer');
+        }
+    
 
+
+    // créer un client
     public function create ()
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $this->client_objet->instanceTest();
 
         $data['title'] = 'Formulaire';
 
@@ -78,12 +89,32 @@ class Client extends CI_Controller
     }
 
 
-
-
     //supprimer un client
     public function delete($id)
     {
         $this->client_model->delete($id);
         redirect(base_url('index.php/client/view_client'));
+    }
+
+
+    // afficher les commandes d'un client
+    public function get_commande_client($id)
+    {
+        $data['content_commandes'] = $this->client_model->get_commande_client($id);
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('clients/commandesClient', $data);
+        $this->load->view('templates/footer');
+    }
+
+
+    // affiche les produits de la commande
+    public function get_product_client($id)
+    {
+        $data['products'] = $this->client_model->get_product_client($id);
+        
+        $this->load->view('templates/header', $data);
+        $this->load->view('clients/produitClient', $data);
+        $this->load->view('templates/footer');
     }
 }

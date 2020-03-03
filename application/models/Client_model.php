@@ -1,13 +1,6 @@
 <?php
 class Client_model extends CI_Model
 {
-    private $clientId;
-    private $nomClient;
-    private $numClient;
-    private $adresse;
-    private $numTel;
-    private $mail;
-
 
     //CONSTRUCT
     public function __construct()
@@ -19,15 +12,21 @@ class Client_model extends CI_Model
 
 
 
-    // affiche les clients ou un client
-    public function get_client(int $id = 0)
+    // affiche les clients ACTIF
+    public function get_client_actif()
     {
-        if ($id <= 0) {
-            $query = $this->db->get('client');
-            return $query->result_array();
-        }
-        $query = $this->db->get_where('client', array('clientId' => $id));
-        return $query->row_array();
+        $this->db->where('isActiv', 1);
+        $query = $this->db->get('client');
+        return $query->result_array();
+    }
+
+
+    // affiche les clients INACTIF
+    public function get_client_inactif()
+    {
+        $this->db->where('isActiv', 0);
+        $query = $this->db->get('client');
+        return $query->result_array();
     }
 
 
@@ -57,5 +56,36 @@ class Client_model extends CI_Model
     public function delete($id)
     {
         return $this->db->delete('client', array('clientId' => $id));
+    }
+
+
+
+    // afficher les commandes d'un client
+    public function get_commande_client($id)
+    {
+        
+        if ($id > 0) {
+            $this->db->select('commande.*, client.clientId, client.nomClient');
+            $this->db->from('commande');
+            $this->db->join('client', 'client.clientId = commande.fk_clientId');
+            $this->db->where('client.clientId', $id);
+            $query = $this->db->get();
+            return $query->result_array();
+        }
+    }
+
+
+    //afficher les produits de la commande d'un produit
+    public function get_product_client($id)
+    {
+        if ($id > 0){
+            $this->db->select('produit.*, commandeproduit.quantite_commande');
+            $this->db->from('produit');
+            $this->db->join('commandeProduit', 'commandeProduit.fk_produitId = produit.produitId', 'left');
+            $this->db->join('commande', 'commande.commandeId = produit.produitId');
+            $this->db->where('commandeproduit.fk_commandeId', $id);
+            $query = $this->db->get();
+            return $query->result_array();
+        }
     }
 }

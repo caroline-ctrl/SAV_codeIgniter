@@ -39,7 +39,7 @@ class Article extends CI_Controller
 
 
     // créer un article
-    public function create ()
+    public function create()
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -52,14 +52,38 @@ class Article extends CI_Controller
 
         if ($this->form_validation->run() === FALSE){
             $this->load->view('templates/header');
-            $this->load->view('article/create');
-            $this->load->view('template/footer');
+            $this->load->view('articles/create');
+            $this->load->view('templates/footer');
         }else {
             $this->article_model->set_article();
             redirect(base_url('index.php/article'));
         }
     }
 
+
+    // modifier un article
+    public function edit($id)
+    {
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $data['single_article'] = $this->article_model->get_article($id);
+
+        $this->form_validation->set_rules('nomProduit', 'NomProduit', 'required');
+        $this->form_validation->set_rules('descriptProduit', 'DescriptProduit', 'required');
+        $this->form_validation->set_rules('qttProduit', 'QttProduit', 'required');
+        $this->form_validation->set_rules('isAvailable', 'IsAvailable', 'required');
+        $this->form_validation->set_rules('prixProduit', 'prixProduit', 'required');
+
+        if ($this->form_validation->run() === FALSE){
+            $this->load->view('templates/header', $data);
+            $this->load->view('articles/edit', $data);
+            $this->load->view('templates/footer');
+        }else {
+            $this->article_model->set_article($id);
+            redirect(base_url('index.php'));
+        }
+
+    }
 
 
     //supprimer
