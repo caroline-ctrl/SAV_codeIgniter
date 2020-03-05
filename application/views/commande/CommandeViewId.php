@@ -2,8 +2,8 @@
 
 <h5><a href="<?php echo site_url('commande') ?>">Retour à la liste des commandes</a></h5><br>
 
-<?php $this->load->helper('url'); ?>
 
+<?php foreach($single_commandes as $single_commande): ?>
 <section class="card">
     <h5 class="card-header"><?php echo $single_commande['nomCommande'] ?></h5>
     <article class="card-body">
@@ -12,3 +12,5 @@
         <p class="card-text">Detail client : <?php echo $single_commande['nomClient'] ?>, n° client : <?php echo $single_commande['numClient'] ?></p>
     </article>
 </section><br> 
+
+<?php endforeach ?>

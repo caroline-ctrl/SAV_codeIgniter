@@ -7,13 +7,14 @@ class Article extends CI_Controller
         parent::__construct();
         $this->load->model('article_model');
         $this->load->helper('url_helper');
-
+        $this->load->library('session');
     }
 
     //affiche les articles
     public function view_article()
     {
         $data['produit'] = $this->article_model->get_article();
+        var_dump($this->session->userdata());
 
 
         $this->load->view('templates/header');
@@ -29,6 +30,7 @@ class Article extends CI_Controller
     {
         $data['single_produit'] = $this->article_model->get_article($id);
         $data['title'] = $data['single_produit']['nomProduit'];
+        var_dump($this->session->userdata());
 
         $this->load->view('templates/header');
         $this->load->view('articles/articleViewId', $data);
@@ -43,6 +45,7 @@ class Article extends CI_Controller
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
+        var_dump($this->session->userdata());
 
         $this->form_validation->set_rules('nomProduit', 'NomProduit', 'required');
         $this->form_validation->set_rules('descriptProduit', 'DescriptProduit', 'required');
@@ -67,6 +70,7 @@ class Article extends CI_Controller
         $this->load->helper('form');
         $this->load->library('form_validation');
         $data['single_article'] = $this->article_model->get_article($id);
+        var_dump($this->session->userdata());
 
         $this->form_validation->set_rules('nomProduit', 'NomProduit', 'required');
         $this->form_validation->set_rules('descriptProduit', 'DescriptProduit', 'required');

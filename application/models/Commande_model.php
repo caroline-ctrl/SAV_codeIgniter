@@ -10,7 +10,7 @@ class Commande_model extends CI_Model
 
 
 
-
+    // afficher une ou plusieurs commandes
     public function get_commande($id = 0)
     {
         if ($id == 0){
@@ -19,11 +19,10 @@ class Commande_model extends CI_Model
         } else {
             $this->db->select('commande.*, client.nomClient, client.numClient');
             $this->db->from('commande');
-            $this->db->join('client', 'client.clientId = commande.commandeId', 'left');
+            $this->db->join('client', 'client.clientId = commande.fk_clientId', 'left');
+            $this->db->where('commande.commandeId', $id);
             $query = $this->db->get();
-            return $query->row_array();
-            // $queryCommande = $this->db->get_where('commande', array('commandeId' => $id));
-            // return $queryCommande->row_array();
+            return $query->result_array();
         }
     }
 

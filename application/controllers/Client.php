@@ -13,6 +13,7 @@ class Client extends CI_Controller
     public function view_client_actif()
     {
         $data['clients'] = $this->client_model->get_client_actif();
+        var_dump($this->session->userdata());
 
         $this->load->view('templates/header');
         $this->load->view('clients/clientViewActif', $data);
@@ -24,7 +25,8 @@ class Client extends CI_Controller
         public function view_client_inactif()
         {
             $data['clients'] = $this->client_model->get_client_inactif();
-    
+            var_dump($this->session->userdata());
+
             $this->load->view('templates/header');
             $this->load->view('clients/clientViewInactif', $data);
             $this->load->view('templates/footer');
@@ -37,6 +39,7 @@ class Client extends CI_Controller
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
+        var_dump($this->session->userdata());
 
         $data['title'] = 'Formulaire';
 
@@ -53,7 +56,7 @@ class Client extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $this->client_model->set_client();
-           redirect(base_url('index.php/client/view_client'));
+           redirect(base_url('index.php/client/view_client_actif'));
         }
     }
 
@@ -64,6 +67,7 @@ class Client extends CI_Controller
 
         $this->load->helper('form');
         $this->load->library('form_validation');
+        var_dump($this->session->userdata());
 
         $data['title'] = 'Modification d\'un client';
         //afin de pouvoir récuperer l'id on fait appel a la methode get_client dans le model
