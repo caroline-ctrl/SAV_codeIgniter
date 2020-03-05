@@ -36,14 +36,16 @@ class Admin_model extends CI_Model
     public function sign_in()
     {
         // dans une variable, on recupère toutes les info de la table 'admin'
-        $query = $this->db->get('admin');
-        $users = $query->result_array();
-        foreach($users as $user){
-            if (($user['nomAdmin'] == $this->input->post('nomAdmin'))) {
-                if (password_verify($this->input->post('psswdAdmin'), $user['psswdAdmin'])){
-                    $this->session();
-                    return $user;
-                }
+        $userName = $this->input->post('nomAdmin');
+        $passwd = $this->input->post('psswdAdmin');
+        
+        $query = $this->db->get_where('admin', array('nomAdmin' => $userName));
+        $user = $query->row_array();
+
+        if ($user['nomAdmin'] == $userName) {
+            if (password_verify($passwd, $user['psswdAdmin'])){
+                $this->session();
+                return $user;
             }
         }
     }
