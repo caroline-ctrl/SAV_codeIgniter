@@ -12,6 +12,7 @@ class Admin extends CI_Controller
 
     public function accueil()
     {
+        $this->load->view('templates/header');
         $this->load->view('admin/admin_accueil');
     }
 
@@ -66,6 +67,7 @@ class Admin extends CI_Controller
     public function deconnection()
     {
         $this->admin_model->log_out();
+        $this->load->view('templates/header');
         $this->load->view('admin/deconnection');
         var_dump($this->session->userdata());
 
