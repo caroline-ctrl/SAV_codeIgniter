@@ -12,7 +12,7 @@ class Admin extends CI_Controller
 
     public function accueil()
     {
-        $this->load->view('templates/header');
+        $this->loadView();
         $this->load->view('admin/admin_accueil');
     }
 
@@ -29,9 +29,8 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('psswdAdmin1', 'Confirm Password', 'matches[psswdAdmin]');
 
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('templates/header');
+            $this->loadView();
             $this->load->view('admin/create_admin');
-            $this->load->view('templates/footer');
         } else {
             $this->admin_model->sign_up();
             redirect(base_url('index.php/page/view'));
@@ -52,9 +51,8 @@ class Admin extends CI_Controller
         var_dump($this->session->userdata());
 
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('templates/header');
+            $this->loadView();
             $this->load->view('admin/connect_admin');
-            $this->load->view('templates/footer');
         } else {
             $this->admin_model->sign_in();
             redirect(base_url('index.php/page/view'));
@@ -67,9 +65,16 @@ class Admin extends CI_Controller
     public function deconnection()
     {
         $this->admin_model->log_out();
-        $this->load->view('templates/header');
+        $this->loadView();
         $this->load->view('admin/deconnection');
         var_dump($this->session->userdata());
+    }
 
+
+
+    public function loadView()
+    {
+        $this->load->view('templates/header');
+        $this->load->view('templates/footer');
     }
 }
