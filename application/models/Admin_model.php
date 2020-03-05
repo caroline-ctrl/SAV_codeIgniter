@@ -35,24 +35,32 @@ class Admin_model extends CI_Model
     // connection
     public function sign_in()
     {
-        // $this->db->where('nomAdmin', $nomAdmin);
-        // $this->db->where('psswdAdmin', $psswdAdmin);
-
-        // 
+        // dans une variable, on recupère toutes les info de la table 'admin'
         $query = $this->db->get('admin');
-        return $query->result_array();
+        $users = $query->result_array();
+        foreach($users as $user){
+            if (($user['nomAdmin'] == $this->input->post('nomAdmin'))) {
+                if (password_verify($this->input->post('psswdAdmin'), $user['psswdAdmin'])){
+                    $this->session();
+                    return $user;
+                }
+            }
+        }
     }
 
 
     public function session()
     {
+        // dans une variable on recupère la valeur du formulaire 'nomAdmin'
         $name = $this->input->post('nomAdmin');
+        // dans l'objet courant, on utilise session pour enregistrer les données de l'utilisateur en session
         $this->session->set_userdata('nomAdmin', $name);
     }
 
 
     public function log_out()
     {
+        // dans l'objet , on supprime les données utilisateurs qui s'appelle 'nomAdmin'
         $this->session->unset_userdata('nomAdmin');
     }
 }
